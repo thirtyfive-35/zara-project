@@ -3,6 +3,7 @@ import { Image, FlatList, View, StatusBar, Dimensions, StyleSheet } from 'react-
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Icon from 'react-native-vector-icons/Ionicons';
 import Searchpage from './Searchpage';
+import Menupage from './Menupage';
 
 const { width, height } = Dimensions.get('screen');
 
@@ -70,7 +71,7 @@ const MainPage = () => (
         />
         <Tab.Screen
             name="Menu"
-            component={() => null}
+            component={Menupage}
             options={{
                 headerShown:false,
                 tabBarIcon: ({ color, size }) => (

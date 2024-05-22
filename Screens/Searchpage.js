@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
 import { View, Text, TouchableOpacity, StyleSheet, TextInput, Image, ScrollView } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 
 const Searchpage = () => {
   const [selectedCategory, setSelectedCategory] = useState('Kadın');
-  const categories = ['Kadın', 'Erkek', 'Çocuk', 'Home'];
+  const categories = ['Kadın', 'Erkek', 'Çocuk'];
   const [searchText, setSearchText] = useState('');
+  const navigation = useNavigation();
 
   const renderCategory = (category) => (
     <TouchableOpacity
@@ -22,6 +24,10 @@ const Searchpage = () => {
     ["BAĞCIKLI TULUM", "1.590,00 TL"],
     ["BAĞCIKLI STRAPLEZ TULUM", "2.090,00 TL"],
   ];
+
+  const handleImagePress = () => {
+    navigation.navigate('Product');
+  };
 
   return (
     <View style={styles.container}>
@@ -42,14 +48,18 @@ const Searchpage = () => {
         <Text style={[styles.greetingText, { fontSize: 12, textAlign: 'right', paddingRight: 30  }]}>İLGİNİZİ ÇEKEBİLECEK DİĞER ÜRÜNLER</Text>
         <View style={styles.productContainer}>
           <View style={styles.productRow}>
-            <Image
-              source={{ uri: 'https://static.zara.net/photos///2020/I/1/1/p/6543/610/091/2/w/2460/6543610091_1_1_1.jpg?ts=1606727905128' }}
-              style={styles.productImage}
-            />
-            <Image
-              source={{ uri: 'https://static.zara.net/photos///2020/I/1/1/p/6543/610/091/2/w/2460/6543610091_2_1_1.jpg?ts=1606727908993' }}
-              style={styles.productImage}
-            />
+            <TouchableOpacity onPress={handleImagePress}>
+              <Image
+                source={{ uri: 'https://static.zara.net/photos///2020/I/1/1/p/6543/610/091/2/w/2460/6543610091_1_1_1.jpg?ts=1606727905128' }}
+                style={styles.productImage}
+              />
+            </TouchableOpacity>
+            <TouchableOpacity onPress={handleImagePress}>
+              <Image
+                source={{ uri: 'https://static.zara.net/photos///2020/I/1/1/p/6543/610/091/2/w/2460/6543610091_2_1_1.jpg?ts=1606727908993' }}
+                style={styles.productImage}
+              />
+            </TouchableOpacity>
           </View>
           <View style={styles.productRow}>
             <View style={styles.productDescription}>
@@ -66,14 +76,18 @@ const Searchpage = () => {
           
           {/* Replicate the photos and descriptions */}
           <View style={styles.productRow}>
-            <Image
-              source={{ uri: 'https://static.zara.net/photos///2020/I/1/1/p/6543/610/091/2/w/2460/6543610091_1_1_1.jpg?ts=1606727905128' }}
-              style={styles.productImage}
-            />
-            <Image
-              source={{ uri: 'https://static.zara.net/photos///2020/I/1/1/p/6543/610/091/2/w/2460/6543610091_2_1_1.jpg?ts=1606727908993' }}
-              style={styles.productImage}
-            />
+            <TouchableOpacity onPress={handleImagePress}>
+              <Image
+                source={{ uri: 'https://static.zara.net/photos///2020/I/1/1/p/6543/610/091/2/w/2460/6543610091_1_1_1.jpg?ts=1606727905128' }}
+                style={styles.productImage}
+              />
+            </TouchableOpacity>
+            <TouchableOpacity onPress={handleImagePress}>
+              <Image
+                source={{ uri: 'https://static.zara.net/photos///2020/I/1/1/p/6543/610/091/2/w/2460/6543610091_2_1_1.jpg?ts=1606727908993' }}
+                style={styles.productImage}
+              />
+            </TouchableOpacity>
           </View>
           <View style={styles.productRow}>
             <View style={styles.productDescription}>
@@ -95,6 +109,7 @@ const Searchpage = () => {
     </View>
   );
 };
+
 
 const styles = StyleSheet.create({
   container: {

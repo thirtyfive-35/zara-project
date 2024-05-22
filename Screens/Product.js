@@ -1,5 +1,7 @@
 import * as React from 'react';
 import { Image, View, Text, TouchableOpacity, StatusBar, Dimensions, StyleSheet, Animated } from 'react-native';
+import { Ionicons } from '@expo/vector-icons';  // Çarpı simgesi için
+import { useNavigation } from '@react-navigation/native';  // Navigasyon için
 
 const { width, height } = Dimensions.get('screen');
 
@@ -20,10 +22,20 @@ const DOT_INDICATOR_SIZE = DOT_SIZE + DOT_SPACING;
 
 export default () => {
     const scrollY = React.useRef(new Animated.Value(0)).current;
+    const navigation = useNavigation();
+
+    const handleClosePress = () => {
+        navigation.goBack();
+    };
 
     return (
         <View style={styles.container}>
             <StatusBar hidden />
+            <View style={styles.header}>
+                <TouchableOpacity onPress={handleClosePress} style={styles.closeButton}>
+                    <Ionicons name="close" size={24} color="black" />
+                </TouchableOpacity>
+            </View>
             <View style={styles.imageContainer}>
                 <Animated.FlatList
                     data={images}
@@ -63,9 +75,9 @@ export default () => {
             </View>
             <View style={styles.footer}>
                 <Text style={styles.footerText}>VOLANLI FİYONKLU SATEN MİNİ ELBİSE</Text>
-                <Text style={styles.footerText}>2.290,0</Text>
+                <Text style={styles.footerText}>2.290,00 TL</Text>
                 <TouchableOpacity style={styles.button} onPress={() => alert('Button Pressed!')}>
-                    <Text style={styles.buttonText}> Ekle </Text>
+                    <Text style={styles.buttonText}>Ekle</Text>
                 </TouchableOpacity>
             </View>
         </View>
@@ -79,9 +91,33 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         backgroundColor: '#fff',
     },
+    header: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'space-between',
+        paddingHorizontal: 10,
+        paddingVertical: 8,
+        backgroundColor: '#fff',
+        borderBottomWidth: 1,
+        borderBottomColor: '#ccc',
+        width: '100%',
+        position: 'absolute',
+        top: 0,
+        zIndex: 1,
+    },
+    closeButton: {
+        padding: 5,
+    },
+    headerTitle: {
+        fontSize: 18,
+        fontWeight: 'bold',
+        flex: 1,
+        textAlign: 'center',
+    },
     imageContainer: {
         flex: 1,
         marginBottom: 100,
+        marginTop: 50, // Header için alan bırakmak amacıyla eklendi
     },
     image: {
         width: ITEM_WIDTH,
@@ -91,14 +127,14 @@ const styles = StyleSheet.create({
     pagination: {
         position: 'absolute',
         top: ITEM_HEIGHT / 2,
-        left: 20
+        left: 20,
     },
     dot: {
         width: DOT_SIZE,
         height: DOT_SIZE,
         borderRadius: DOT_SIZE,
         backgroundColor: '#333',
-        marginBottom: DOT_SPACING
+        marginBottom: DOT_SPACING,
     },
     dotIndicator: {
         width: DOT_INDICATOR_SIZE,
@@ -108,7 +144,7 @@ const styles = StyleSheet.create({
         borderColor: '#333',
         position: 'absolute',
         top: -DOT_SIZE / 2,
-        left: -DOT_SIZE / 2
+        left: -DOT_SIZE / 2,
     },
     footer: {
         position: 'absolute',
@@ -136,5 +172,5 @@ const styles = StyleSheet.create({
     buttonText: {
         fontSize: 16,
         color: '#333', // Butonun içindeki yazıyı siyah yapmak için
-    }
+    },
 });
