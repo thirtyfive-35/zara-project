@@ -1,15 +1,17 @@
 import React, { useState, useEffect } from 'react';
 import { View, Image, StyleSheet, ScrollView, TouchableOpacity } from 'react-native';
-import { Ionicons } from '@expo/vector-icons';  // geri simgesi için
-import { useNavigation } from '@react-navigation/native';  // Navigasyon için
+import { Ionicons } from '@expo/vector-icons';
+import { useNavigation } from '@react-navigation/native';
 
 const Menuback = ({ route }) => {
     const { category, content } = route.params;
     const [products, setProducts] = useState([]);
-
     const navigation = useNavigation();
 
     useEffect(() => {
+        const category = 'kadin'; // Manuel olarak kategori değeri atanıyor
+        const content = 'ELBİSE'; // Manuel olarak içerik değeri atanıyor
+
         // category ve content değerlerinin tanımlı olduğunu kontrol et
         if (category && content) {
             // API isteği göndermek için fetch kullanımı
@@ -18,20 +20,19 @@ const Menuback = ({ route }) => {
                 .then(data => {
                     setProducts(data); // API'den gelen verileri state'e kaydet
                     console.log(data); // API'den gelen verileri konsola yazdır
-                    console.log(route.params)
                 })
                 .catch(error => {
                     console.error('API isteği sırasında hata oluştu:', error);
                 });
         }
-    }, [category, content]); // category ve content bilgileri değiştiğinde yeniden çalışır
+    }, []); // Boş bağımlılık dizisi, sadece bir kez çalışması için
 
     const handleClosePress = () => {
         navigation.goBack();
     };
 
-    const handleImagePress = (urunId) => {
-        navigation.navigate('Product', { urunId });
+    const handleImagePress = () => {
+        navigation.navigate('Product');
     };
 
     return (
@@ -44,7 +45,7 @@ const Menuback = ({ route }) => {
             <ScrollView>
                 <View style={styles.container}>
                     {products.map((product, index) => (
-                        <TouchableOpacity key={index} onPress={() => handleImagePress(product.urunId)}>
+                        <TouchableOpacity key={index} onPress={handleImagePress}>
                             <Image
                                 source={{ uri: product.urunUrl }}
                                 style={styles.image}
@@ -60,17 +61,12 @@ const Menuback = ({ route }) => {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        flexDirection: 'row',
-        flexWrap: 'wrap',
-        justifyContent: 'center',
-        alignItems: 'center',
         backgroundColor: '#fff',
     },
     image: {
-        width: 500,
-        height: 600,
-
-
+        flex: 1,
+        aspectRatio: 1,
+        margin: 5,
     },
     header: {
         paddingVertical: 10,

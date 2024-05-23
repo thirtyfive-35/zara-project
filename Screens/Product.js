@@ -1,17 +1,9 @@
-import * as React from 'react';
-import { Image, View, Text, TouchableOpacity, StatusBar, Dimensions, StyleSheet, Animated } from 'react-native';
-import { Ionicons } from '@expo/vector-icons';  // Çarpı simgesi için
-import { useNavigation } from '@react-navigation/native';  // Navigasyon için
+import React, { useState, useEffect } from 'react';
+import { Image, View, Text, TouchableOpacity, StatusBar, Dimensions, StyleSheet, Animated, ActivityIndicator } from 'react-native';
+import { Ionicons } from '@expo/vector-icons'; // Çarpı simgesi için
+import { useNavigation, useRoute } from '@react-navigation/native'; // Navigasyon ve route için
 
 const { width, height } = Dimensions.get('screen');
-
-const images = [
-    'https://static.zara.net/photos///2020/I/1/1/p/6543/610/091/2/w/2460/6543610091_1_1_1.jpg?ts=1606727905128',
-    'https://static.zara.net/photos///2020/I/1/1/p/6543/610/091/2/w/2460/6543610091_2_1_1.jpg?ts=1606727908993',
-    'https://static.zara.net/photos///2020/I/1/1/p/6543/610/091/2/w/2460/6543610091_2_2_1.jpg?ts=1606727889015',
-    'https://static.zara.net/photos///2020/I/1/1/p/6543/610/091/2/w/2460/6543610091_2_3_1.jpg?ts=1606727896369',
-    'https://static.zara.net/photos///2020/I/1/1/p/6543/610/091/2/w/2460/6543610091_2_4_1.jpg?ts=1606727898445',
-];
 
 const ITEM_WIDTH = width;
 const ITEM_HEIGHT = height * 0.75;
@@ -20,13 +12,56 @@ const DOT_SIZE = 8;
 const DOT_SPACING = 8;
 const DOT_INDICATOR_SIZE = DOT_SIZE + DOT_SPACING;
 
-export default () => {
+const Product = () => {
+    const [productDetails, setProductDetails] = useState(null);
+    const [productImages, setProductImages] = useState([]);
+    const [loading, setLoading] = useState(true);
     const scrollY = React.useRef(new Animated.Value(0)).current;
     const navigation = useNavigation();
+    const route = useRoute();
+    const { urunId } = route.params; // Navigasyondan gelen urunId'yi al
+
+    useEffect(() => {
+        // API isteği yaparak ürün detaylarını al
+        if (urunId) {
+            fetch(`http://192.168.1.28:3000/menu/urun/detay?urunId=${urunId}`)
+                .then(response => response.json())
+                .then(data => {
+                    if (data && data.length > 0) {
+                        setProductDetails({
+                            urunAd: data[0].urunAd,
+                            urunFiyat: data[0].urunFiyat,
+                        });
+                        setProductImages(data.map(item => item.urunUrl));
+                    }
+                    setLoading(false);
+                })
+                .catch(error => {
+                    console.error('API isteği sırasında hata oluştu:', error);
+                    setLoading(false);
+                });
+        }
+    }, [urunId]);
 
     const handleClosePress = () => {
         navigation.goBack();
     };
+
+    if (loading) {
+        return (
+            <View style={styles.loader}>
+                <ActivityIndicator size="large" color="#0000ff" />
+            </View>
+        );
+    }
+
+    if (!productDetails) {
+        return (
+            <View style={styles.errorContainer}>
+                <Text style={styles.errorText}>Ürün bulunamadı</Text>
+            </View>
+        );
+    }
 
     return (
         <View style={styles.container}>
@@ -38,7 +73,7 @@ export default () => {
             </View>
             <View style={styles.imageContainer}>
                 <Animated.FlatList
-                    data={images}
+                    data={productImages}
                     keyExtractor={(_, index) => index.toString()}
                     snapToInterval={ITEM_HEIGHT}
                     decelerationRate="fast"
@@ -53,7 +88,7 @@ export default () => {
                     )}
                 />
                 <View style={styles.pagination}>
-                    {images.map((_, index) => {
+                    {productImages.map((_, index) => {
                         return (
                             <View
                                 key={index}
@@ -74,15 +109,15 @@ export default () => {
                 </View>
             </View>
             <View style={styles.footer}>
-                <Text style={styles.footerText}>VOLANLI FİYONKLU SATEN MİNİ ELBİSE</Text>
-                <Text style={styles.footerText}>2.290,00 TL</Text>
+                <Text style={styles.footerText}>{productDetails.urunAd}</Text>
+                <Text style={styles.footerText}>{productDetails.urunFiyat} TL</Text>
                 <TouchableOpacity style={styles.button} onPress={() => alert('Button Pressed!')}>
                     <Text style={styles.buttonText}>Ekle</Text>
                 </TouchableOpacity>
             </View>
         </View>
     );
-}
+};
 
 const styles = StyleSheet.create({
     container: {
@@ -173,4 +208,20 @@ const styles = StyleSheet.create({
         fontSize: 16,
         color: '#333', // Butonun içindeki yazıyı siyah yapmak için
     },
+    loader: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
+    errorContainer: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
+    errorText: {
+        fontSize: 18,
+        color: 'red',
+    },
 });
+
+export default Product;

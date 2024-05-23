@@ -8,10 +8,10 @@ import Menupage from './Menupage';
 const { width, height } = Dimensions.get('screen');
 
 const images = [
-    'https://static.zara.net/photos///2020/I/1/1/p/6543/610/091/2/w/2460/6543610091_1_1_1.jpg?ts=1606727905128',
-    'https://static.zara.net/photos///2020/I/1/1/p/6543/610/091/2/w/2460/6543610091_2_1_1.jpg?ts=1606727908993',
-    'https://static.zara.net/photos///2020/I/1/1/p/6543/610/091/2/w/2460/6543610091_2_2_1.jpg?ts=1606727889015',
-    'https://static.zara.net/photos///2020/I/1/1/p/6543/610/091/2/w/2460/6543610091_2_3_1.jpg?ts=1606727896369',
+    'https://static.zara.net/assets/public/dd96/6158/760141f793cc/d529bc5e9e64/01063406832-p/01063406832-p.jpg?ts=1708510193846&amp;w=503',
+    'https://static.zara.net/assets/public/dd96/6158/760141f793cc/d529bc5e9e64/01063406832-p/01063406832-p.jpg?ts=1708510193846&amp;w=503',
+    'https://static.zara.net/assets/public/dd96/6158/760141f793cc/d529bc5e9e64/01063406832-p/01063406832-p.jpg?ts=1708510193846&amp;w=503',
+    'https://static.zara.net/assets/public/dd96/6158/760141f793cc/d529bc5e9e64/01063406832-p/01063406832-p.jpg?ts=1708510193846&amp;w=503',
     'https://static.zara.net/assets/public/dd96/6158/760141f793cc/d529bc5e9e64/01063406832-p/01063406832-p.jpg?ts=1708510193846&amp;w=503',
 ];
 

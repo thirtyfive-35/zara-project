@@ -1,12 +1,29 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { View, Text, TouchableOpacity, StyleSheet, TextInput, Image, ScrollView } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 
 const Searchpage = () => {
   const [selectedCategory, setSelectedCategory] = useState('Kadın');
-  const categories = ['Kadın', 'Erkek', 'Çocuk'];
+  const [products, setProducts] = useState([]);
   const [searchText, setSearchText] = useState('');
   const navigation = useNavigation();
+
+  const categories = ['Kadın', 'Erkek', 'Çocuk'];
+
+  useEffect(() => {
+    const fetchProducts = async () => {
+      try {
+        const response = await fetch(`http://192.168.1.28:3000/api/products/${selectedCategory}`);
+        const data = await response.json();
+        console.log("Fetched products:", data);
+        setProducts(data);
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
+    };
+
+    fetchProducts();
+  }, [selectedCategory]);
 
   const renderCategory = (category) => (
     <TouchableOpacity
@@ -20,14 +37,10 @@ const Searchpage = () => {
     </TouchableOpacity>
   );
 
-  const descriptions = [
-    ["BAĞCIKLI TULUM", "1.590,00 TL"],
-    ["BAĞCIKLI STRAPLEZ TULUM", "2.090,00 TL"],
-  ];
-
-  const handleImagePress = () => {
-    navigation.navigate('Product');
-  };
+  const handleImagePress = (urunId) => {
+    console.log("Navigating to Product with urunId:", urunId); 
+    navigation.navigate('Product', { urunId });
+};
 
   return (
     <View style={styles.container}>
@@ -47,69 +60,25 @@ const Searchpage = () => {
       <ScrollView contentContainerStyle={styles.scrollContainer}>
         <Text style={[styles.greetingText, { fontSize: 12, textAlign: 'right', paddingRight: 30  }]}>İLGİNİZİ ÇEKEBİLECEK DİĞER ÜRÜNLER</Text>
         <View style={styles.productContainer}>
-          <View style={styles.productRow}>
-            <TouchableOpacity onPress={handleImagePress}>
-              <Image
-                source={{ uri: 'https://static.zara.net/photos///2020/I/1/1/p/6543/610/091/2/w/2460/6543610091_1_1_1.jpg?ts=1606727905128' }}
-                style={styles.productImage}
-              />
-            </TouchableOpacity>
-            <TouchableOpacity onPress={handleImagePress}>
-              <Image
-                source={{ uri: 'https://static.zara.net/photos///2020/I/1/1/p/6543/610/091/2/w/2460/6543610091_2_1_1.jpg?ts=1606727908993' }}
-                style={styles.productImage}
-              />
-            </TouchableOpacity>
-          </View>
-          <View style={styles.productRow}>
-            <View style={styles.productDescription}>
-              {descriptions[0].map((desc, index) => (
-                <Text key={index} style={styles.descriptionText}>{desc}</Text>
-              ))}
+          {products.map((product, index) => (
+            <View key={index} style={styles.productItem}>
+              <TouchableOpacity onPress={() => handleImagePress(product.urunId)}>
+                <Image
+                  source={{ uri: product.urunUrl }}
+                  style={styles.productImage}
+                />
+              </TouchableOpacity>
+              <View style={styles.productDescription}>
+                <Text style={styles.descriptionText}>{product.urunAd}</Text>
+                <Text style={styles.descriptionText}>{product.urunFiyat}</Text>
+              </View>
             </View>
-            <View style={styles.productDescription}>
-              {descriptions[1].map((desc, index) => (
-                <Text key={index} style={styles.descriptionText}>{desc}</Text>
-              ))}
-            </View>
-          </View>
-          
-          {/* Replicate the photos and descriptions */}
-          <View style={styles.productRow}>
-            <TouchableOpacity onPress={handleImagePress}>
-              <Image
-                source={{ uri: 'https://static.zara.net/photos///2020/I/1/1/p/6543/610/091/2/w/2460/6543610091_1_1_1.jpg?ts=1606727905128' }}
-                style={styles.productImage}
-              />
-            </TouchableOpacity>
-            <TouchableOpacity onPress={handleImagePress}>
-              <Image
-                source={{ uri: 'https://static.zara.net/photos///2020/I/1/1/p/6543/610/091/2/w/2460/6543610091_2_1_1.jpg?ts=1606727908993' }}
-                style={styles.productImage}
-              />
-            </TouchableOpacity>
-          </View>
-          <View style={styles.productRow}>
-            <View style={styles.productDescription}>
-              {descriptions[0].map((desc, index) => (
-                <Text key={index} style={styles.descriptionText}>{desc}</Text>
-              ))}
-            </View>
-            <View style={styles.productDescription}>
-              {descriptions[1].map((desc, index) => (
-                <Text key={index} style={styles.descriptionText}>{desc}</Text>
-              ))}
-            </View>
-          </View>
-          
-          {/* End of replication */}
+          ))}
         </View>
-        {/* Diğer içerikler buraya eklenebilir */}
       </ScrollView>
     </View>
   );
 };
-
 
 const styles = StyleSheet.create({
   container: {
@@ -119,7 +88,7 @@ const styles = StyleSheet.create({
   fixedHeader: {
     backgroundColor: '#fff',
     zIndex: 1,
-    elevation: 2, // for Android shadow
+    elevation: 2,
   },
   navigation: {
     flexDirection: 'row',
@@ -156,7 +125,7 @@ const styles = StyleSheet.create({
   },
   scrollContainer: {
     flexGrow: 1,
-    paddingBottom: 20, // Add padding for bottom space
+    paddingBottom: 20,
   },
   greetingText: {
     fontSize: 12,
@@ -168,40 +137,22 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
     marginTop: 0,
   },
-  productRow: {
-    flexDirection: 'row',
-    marginBottom: 10,
-    marginLeft:0,
-    marginRight:-50,
+  productItem: {
+    marginBottom: 20,
   },
   productImage: {
-    width: 182,
+    width: '100%',
     height: 300,
-    marginRight: 35,
-    marginLeft:-15,
     borderWidth: 1,
-    borderColor: 'black', // Siyah çerçeve
-    marginHorizontal: 10,
-    marginTop: -10,
+    borderColor: 'black',
   },
   productDescription: {
-    flex: 1,
-    borderWidth: 1,
-    borderColor: '#ccc',
-    borderRadius: 0,
     padding: 20,
-    marginRight: 35,
-    marginLeft:-15,
-    marginTop: -10,
-    borderColor: 'black',
   },
   descriptionText: {
     textAlign: 'left',
-    marginRight: -10 ,
-    marginLeft: -10,
-    marginBottom: 10,
-    marginTop: -10,
     fontSize: 15,
+    marginBottom: 10,
   },
 });
 

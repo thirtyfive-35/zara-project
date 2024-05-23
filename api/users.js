@@ -94,6 +94,69 @@ app.get('/protected', (req, res) => {
     });
 });
 
+app.get('/menu/urunler', (req, res) => {
+    const { cinsiyet, kategori } = req.query;
+
+    if (!cinsiyet || !kategori) {
+        return res.status(400).json({ error: 'cinsiyet ve kategori parametreleri gereklidir' });
+    }
+
+    const query = `
+        SELECT ud.urunId, ud.urunUrl 
+        FROM urun u 
+        INNER JOIN urundetay ud ON u.id = ud.urunId 
+        WHERE u.cinsiyet = ? AND u.kategori = ? GROUP BY ud.urunId
+    `;
+    
+    db.query(query, [cinsiyet, kategori], (err, results) => {
+        if (err) {
+            console.error('Sorgu sırasında hata:', err);
+            return res.status(500).json({ error: 'Veritabanı hatası' });
+        }
+
+        res.json(results);
+    });
+});
+
+app.get('/menu/urun/detay', (req, res) => {
+    const { urunId} = req.query;
+
+    if (!urunId) {
+        return res.status(400).json({ error: 'cinsiyet ve kategori parametreleri gereklidir' });
+    }
+
+    const query = `
+    SELECT ud.urunId, u.urunAd, u.urunFiyat, ud.urunUrl FROM urun u INNER JOIN urundetay ud ON u.id = ud.urunId WHERE ud.urunId = ? 
+    `;
+    
+    db.query(query, [urunId], (err, results) => {
+        if (err) {
+            console.error('Sorgu sırasında hata:', err);
+            return res.status(500).json({ error: 'Veritabanı hatası' });
+        }
+
+        res.json(results);
+    });
+});
+
+// Ürünleri cinsiyete göre getiren API
+app.get('/api/products/:gender', (req, res) => {
+    const gender = req.params.gender;
+    const query = `
+      SELECT urundetay.urunId ,urun.urunAd, urun.urunFiyat, urundetay.urunUrl 
+      FROM urun
+      INNER JOIN urundetay ON urun.id = urundetay.urunId
+      WHERE urun.cinsiyet = ? GROUP BY urundetay.urunId
+      `;
+
+    db.query(query, [gender], (err, results) => {
+      if (err) {
+        return res.status(500).json({ error: err.message });
+      }
+      res.json(results);
+    });
+  });
+
 
 
 const PORT = 3000;

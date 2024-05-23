@@ -3,7 +3,7 @@ import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 
 const NavigationPage = () => {
-  const [selectedCategory, setSelectedCategory] = useState('Kadın');
+  const [selectedCategory, setSelectedCategory] = useState('kadin');
   const [contentVisible, setContentVisible] = useState(true);
   const [categoryContent, setCategoryContent] = useState([]);
   const navigation = useNavigation();
@@ -13,7 +13,7 @@ const NavigationPage = () => {
     // Kategoriye göre ilgili içeriği gösterme/kapama
     setContentVisible(true);
     // Kategorilere göre içerikleri ayarlama
-    if (category === 'Kadın') {
+    if (category === 'kadin') {
       setCategoryContent([
         'BLAZER',
         'ELBİSE',
@@ -39,7 +39,7 @@ const NavigationPage = () => {
         'AYAKKABI',
         'AKSESUAR'
       ]);
-    } else if (category === 'Çocuk') {
+    } else if (category === 'cocuk') {
       setCategoryContent([
         'KETEN',
         'T-SHIRT',
@@ -55,25 +55,28 @@ const NavigationPage = () => {
     }
   };
 
-  const handleOtherContentPress = (content) => {
+  const handleOtherContentPress = (category, content) => {
     // İlgili içerik tıklandığında Menuback.js sayfasına yönlendirme yap
-    navigation.navigate('Menuback');
+    console.log(category)
+    console.log(content)
+    navigation.navigate('Menuback', { category, content });
   };
+  
 
   // Component yüklendiğinde çalışacak kodlar
   useEffect(() => {
-    // İlk olarak sayfa yüklendiğinde "Kadın" kategorisinin içeriğini göster
-    handleCategoryPress('Kadın');
+    // İlk olarak sayfa yüklendiğinde "kadin" kategorisinin içeriğini göster
+    handleCategoryPress('kadin');
   }, []);
 
   return (
     <View style={styles.container}>
       <View style={styles.navigation}>
         <TouchableOpacity
-          style={[styles.category, selectedCategory === 'Kadın' && styles.selectedCategory]}
-          onPress={() => handleCategoryPress('Kadın')}
+          style={[styles.category, selectedCategory === 'kadin' && styles.selectedCategory]}
+          onPress={() => handleCategoryPress('kadin')}
         >
-          <Text style={[styles.categoryText, selectedCategory === 'Kadın' && styles.selectedCategoryText]}>Kadın</Text>
+          <Text style={[styles.categoryText, selectedCategory === 'kadin' && styles.selectedCategoryText]}>kadin</Text>
         </TouchableOpacity>
         <TouchableOpacity
           style={[styles.category, selectedCategory === 'Erkek' && styles.selectedCategory]}
@@ -82,17 +85,17 @@ const NavigationPage = () => {
           <Text style={[styles.categoryText, selectedCategory === 'Erkek' && styles.selectedCategoryText]}>Erkek</Text>
         </TouchableOpacity>
         <TouchableOpacity
-          style={[styles.category, selectedCategory === 'Çocuk' && styles.selectedCategory]}
-          onPress={() => handleCategoryPress('Çocuk')}
+          style={[styles.category, selectedCategory === 'cocuk' && styles.selectedCategory]}
+          onPress={() => handleCategoryPress('cocuk')}
         >
-          <Text style={[styles.categoryText, selectedCategory === 'Çocuk' && styles.selectedCategoryText]}>Çocuk</Text>
+          <Text style={[styles.categoryText, selectedCategory === 'cocuk' && styles.selectedCategoryText]}>Çocuk</Text>
         </TouchableOpacity>
       </View>
       <View style={styles.otherContent}>
         {contentVisible && (
           <>
             {categoryContent.map((item, index) => (
-              <TouchableOpacity key={index} onPress={() => handleOtherContentPress(item)}>
+              <TouchableOpacity key={index} onPress={() => handleOtherContentPress(selectedCategory,item)}>
                 <Text style={styles.otherContentText}>{item}</Text>
               </TouchableOpacity>
             ))}
