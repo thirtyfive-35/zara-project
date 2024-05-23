@@ -1,9 +1,12 @@
 import React, { useState } from "react";
 import { Text, StyleSheet, View, Image, TextInput, TouchableOpacity } from "react-native";
+import { useAuth  } from './AuthContext';
 
 const SingIn = ({ navigation }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const { signIn } = useAuth()
+  
 
   // Kullanıcı girişi fonksiyonu
   const handleSignIn = () => {
@@ -20,6 +23,7 @@ const SingIn = ({ navigation }) => {
         console.log(data); // API'den dönen yanıtı konsola yazdır
         if (data.token) {
             // Giriş başarılıysa MainPage'e git
+            signIn(data.token); 
             navigation.navigate('MainPage');
         } else {
             // Giriş başarısızsa kullanıcıyı bilgilendir
@@ -28,7 +32,7 @@ const SingIn = ({ navigation }) => {
     })
     .catch(error => {
         console.error('Error:', error);
-        alert('Bir hata oluştu. Lütfen daha sonra tekrar deneyin.');
+        alert('Bir hata oluştu. Lütfen daha sonra tekrar deneyiin.');
     });
   };
 

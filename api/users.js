@@ -22,6 +22,72 @@ db.connect(err => {
     console.log('Connected to the database');
 });
 
+
+
+
+// JWT Doğrulama Middleware'i
+const authenticateToken = (req, res, next) => {
+    const authHeader = req.headers['authorization'];
+    const token = authHeader && authHeader.split(' ')[1];
+
+    if (!token) {
+        return res.status(401).json({ message: 'No token provided' });
+    }
+
+    jwt.verify(token, 'secret_key', (err, user) => {
+        if (err) {
+            return res.status(403).json({ message: 'Invalid token' });
+        }
+
+        req.user = user; // Token'daki bilgileri isteğe ekle
+        next();
+    });
+};
+
+app.post('/add-to-cart', authenticateToken, (req, res) => {
+    const userId = req.user.userId;  // Doğrulanan token'dan kullanıcı ID'sini al
+    const { urunId } = req.body;
+
+    if (!urunId) {
+        return res.status(400).json({ message: 'Missing fields in request body' });
+    }
+
+    // Belirli bir kullanıcının belirli bir ürünü sepette bulunup bulunmadığını kontrol et
+    const checkQuery = 'SELECT * FROM sepet WHERE userId = ? AND urunId = ?';
+    db.query(checkQuery, [userId, urunId], (checkErr, checkResult) => {
+        if (checkErr) {
+            console.error('Error checking cart:', checkErr);
+            return res.status(500).json({ message: 'Internal server error' });
+        }
+
+        // Eğer sepette varsa miktarı artır
+        if (checkResult.length > 0) {
+            const updateQuery = 'UPDATE sepet SET miktar = miktar + 1 WHERE userId = ? AND urunId = ?';
+            db.query(updateQuery, [userId, urunId], (updateErr, updateResult) => {
+                if (updateErr) {
+                    console.error('Error updating cart:', updateErr);
+                    return res.status(500).json({ message: 'Internal server error' });
+                }
+
+                res.status(200).json({ message: 'Product quantity updated in cart' });
+            });
+        } else {
+            // Eğer sepette yoksa yeni bir satır ekle
+            const insertQuery = 'INSERT INTO sepet (userId, urunId, miktar, aktif) VALUES (?, ?, ?, ?)';
+            db.query(insertQuery, [userId, urunId, 1, 1], (insertErr, insertResult) => {
+                if (insertErr) {
+                    console.error('Error adding to cart:', insertErr);
+                    return res.status(500).json({ message: 'Internal server error' });
+                }
+
+                res.status(200).json({ message: 'Product added to cart' });
+            });
+        }
+    });
+});
+
+
+
 app.post('/register', async (req, res) => {
     const { fullname, email, mobile, password } = req.body;
 

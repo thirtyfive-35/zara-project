@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { Image, View, Text, TouchableOpacity, StatusBar, Dimensions, StyleSheet, Animated, ActivityIndicator } from 'react-native';
 import { Ionicons } from '@expo/vector-icons'; // Çarpı simgesi için
 import { useNavigation, useRoute } from '@react-navigation/native'; // Navigasyon ve route için
+import { useAuth } from './AuthContext'; 
+
 
 const { width, height } = Dimensions.get('screen');
 
@@ -20,8 +22,34 @@ const Product = () => {
     const navigation = useNavigation();
     const route = useRoute();
     const { urunId } = route.params; // Navigasyondan gelen urunId'yi al
+    const { token } = useAuth();
+
+    const addToCart = async () => {
+        console.log(token);
+        try {
+            const response = await fetch('http://192.168.1.28:3000/add-to-cart', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}` // Token'ı Authorization başlığına ekle
+                },
+                body: JSON.stringify({ urunId: urunId }) // Ürün ID'sini gönder
+            });
+            const data = await response.json();
+            console.log(data); // API'den dönen yanıtı konsola yazdır
+            console.log(urunId)
+            alert('Ürün sepete eklendi');
+            // Burada isteğin başarılı olduğuna dair bir işlem yapabilirsiniz
+        } catch (error) {
+            console.error('Error:', error);
+            // Hata durumunda kullanıcıya bilgi verebilirsiniz
+            alert('Bir hata oluştu. Lütfen daha sonra tekrar deneyin.');
+        }
+    };
+    
 
     useEffect(() => {
+        
         // API isteği yaparak ürün detaylarını al
         if (urunId) {
             fetch(`http://192.168.1.28:3000/menu/urun/detay?urunId=${urunId}`)
@@ -111,9 +139,10 @@ const Product = () => {
             <View style={styles.footer}>
                 <Text style={styles.footerText}>{productDetails.urunAd}</Text>
                 <Text style={styles.footerText}>{productDetails.urunFiyat} TL</Text>
-                <TouchableOpacity style={styles.button} onPress={() => alert('Button Pressed!')}>
+                <TouchableOpacity style={styles.button} onPress={addToCart}>
                     <Text style={styles.buttonText}>Ekle</Text>
                 </TouchableOpacity>
+
             </View>
         </View>
     );

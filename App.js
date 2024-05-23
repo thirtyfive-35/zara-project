@@ -2,6 +2,7 @@ import React from 'react';
 import 'react-native-gesture-handler';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
+import { AuthProvider } from './Screens/AuthContext'; 
 import SignIn from './Screens/SignIn';
 import SignUp from './Screens/SignUp';
 import MainPage from './Screens/Mainpage';
@@ -14,6 +15,7 @@ const Stack = createStackNavigator();
 
 const App = () => {
   return (
+    <AuthProvider>
     <NavigationContainer>
       <Stack.Navigator>
         <Stack.Screen name="SignIn" component={SignIn} options={{ headerShown: false }} />
@@ -25,6 +27,7 @@ const App = () => {
         <Stack.Screen name="Menuback" component={Menuback} options={{ headerShown: false }} />
       </Stack.Navigator>
     </NavigationContainer>
+    </AuthProvider>
   );
 };
 
