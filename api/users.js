@@ -157,6 +157,26 @@ app.get('/api/products/:gender', (req, res) => {
     });
   });
 
+  app.get('/api/products/:cinsiyet', (req, res) => {
+    const { cinsiyet } = req.params;
+    const { search } = req.query;
+
+    let query = 'SELECT * FROM urun WHERE cinsiyet = ?';
+    let queryParams = [cinsiyet];
+
+    if (search) {
+      query += ' AND urunAd LIKE ?';
+      queryParams.push(`%${search}%`);
+    }
+
+    db.query(query, queryParams, (error, results) => {
+      if (error) {
+        return res.status(500).json({ message: 'Error fetching products', error });
+      }
+      res.json(results);
+    });
+  });
+
 
 
 const PORT = 3000;

@@ -1,21 +1,24 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text, TouchableOpacity, StyleSheet, TextInput, Image, ScrollView } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
+import { Ionicons } from '@expo/vector-icons';
+import SearchInput, { createFilter } from 'react-native-search-filter';
+
+const KEYS_TO_FILTERS = ['urunAd'];
 
 const Searchpage = () => {
-  const [selectedCategory, setSelectedCategory] = useState('Kadın');
+  const [selectedCinsiyet, setSelectedCinsiyet] = useState('Kadın');
   const [products, setProducts] = useState([]);
-  const [searchText, setSearchText] = useState('');
+  const [searchTerm, setSearchTerm] = useState('');
   const navigation = useNavigation();
 
-  const categories = ['Kadın', 'Erkek', 'Çocuk'];
+  const cinsiyetler = ['Kadın', 'Erkek', 'Çocuk'];
 
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const response = await fetch(`http://192.168.1.28:3000/api/products/${selectedCategory}`);
+        const response = await fetch(`http://192.168.1.28:3000/api/products/${selectedCinsiyet}`);
         const data = await response.json();
-        console.log("Fetched products:", data);
         setProducts(data);
       } catch (error) {
         console.error('Error fetching data:', error);
@@ -23,44 +26,56 @@ const Searchpage = () => {
     };
 
     fetchProducts();
-  }, [selectedCategory]);
+  }, [selectedCinsiyet]);
 
-  const renderCategory = (category) => (
+  const filteredProducts = products.filter(createFilter(searchTerm, KEYS_TO_FILTERS));
+
+  const renderCinsiyet = (cinsiyet) => (
     <TouchableOpacity
-      key={category}
-      style={[styles.category, selectedCategory === category && styles.selectedCategory]}
-      onPress={() => setSelectedCategory(category)}
+      key={cinsiyet}
+      style={[styles.cinsiyet, selectedCinsiyet === cinsiyet && styles.selectedCinsiyet]}
+      onPress={() => setSelectedCinsiyet(cinsiyet)}
     >
-      <Text style={[styles.categoryText, selectedCategory === category && styles.selectedCategoryText]}>
-        {category}
+      <Text style={[styles.cinsiyetText, selectedCinsiyet === cinsiyet && styles.selectedCinsiyetText]}>
+        {cinsiyet}
       </Text>
     </TouchableOpacity>
   );
 
   const handleImagePress = (urunId) => {
-    console.log("Navigating to Product with urunId:", urunId); 
     navigation.navigate('Product', { urunId });
 };
+
+  const handleClearSearch = () => {
+    setSearchTerm('');
+    console.log("Search term cleared:", searchTerm); 
+  };
 
   return (
     <View style={styles.container}>
       <View style={styles.fixedHeader}>
         <View style={styles.navigation}>
-          {categories.map(renderCategory)}
+          {cinsiyetler.map(renderCinsiyet)}
         </View>
         <View style={styles.searchContainer}>
-          <TextInput
+          <SearchInput
+            onChangeText={(term) => setSearchTerm(term)}
             style={styles.searchInput}
             placeholder="Ara"
-            value={searchText}
-            onChangeText={setSearchText}
+            placeholderTextColor="#000"
+            textColor="#000"
           />
+          {searchTerm !== '' && (
+            <TouchableOpacity style={styles.clearButton} onPress={handleClearSearch}>
+              <Ionicons name="close-circle" size={24} color="black" />
+            </TouchableOpacity>
+          )}
         </View>
       </View>
       <ScrollView contentContainerStyle={styles.scrollContainer}>
-        <Text style={[styles.greetingText, { fontSize: 12, textAlign: 'right', paddingRight: 30  }]}>İLGİNİZİ ÇEKEBİLECEK DİĞER ÜRÜNLER</Text>
+        <Text style={[styles.greetingText, { fontSize: 12, textAlign: 'right', paddingRight: 30 }]}>İLGİNİZİ ÇEKEBİLECEK DİĞER ÜRÜNLER</Text>
         <View style={styles.productContainer}>
-          {products.map((product, index) => (
+          {filteredProducts.map((product, index) => (
             <View key={index} style={styles.productItem}>
               <TouchableOpacity onPress={() => handleImagePress(product.urunId)}>
                 <Image
@@ -96,32 +111,42 @@ const styles = StyleSheet.create({
     paddingVertical: 50,
     paddingHorizontal: 20,
   },
-  category: {
+  cinsiyet: {
     paddingVertical: 10,
     paddingHorizontal: 20,
   },
-  selectedCategory: {
+  selectedCinsiyet: {
     borderBottomWidth: 2,
     borderBottomColor: '#000',
   },
-  categoryText: {
+  cinsiyetText: {
     color: '#000',
     textAlign: 'left',
   },
-  selectedCategoryText: {
+  selectedCinsiyetText: {
     fontWeight: 'bold',
   },
   searchContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
     paddingHorizontal: 15,
     paddingVertical: 5,
     marginTop: -40,
+    width: '100%', 
   },
   searchInput: {
+    width: 320,
+    height: 40,
     borderWidth: 1,
-    borderColor: '#ccc',
+    borderColor: 'gray',
     borderRadius: 5,
     paddingHorizontal: 10,
-    paddingVertical: 8,
+    marginTop: 10,
+
+  },
+  clearButton: {
+    marginLeft: 10,
+    marginBottom:-10,
   },
   scrollContainer: {
     flexGrow: 1,
@@ -130,7 +155,7 @@ const styles = StyleSheet.create({
   greetingText: {
     fontSize: 12,
     marginVertical: 20,
-    marginHorizontal:-20,
+    marginHorizontal: -20,
     marginTop: 50,
   },
   productContainer: {
