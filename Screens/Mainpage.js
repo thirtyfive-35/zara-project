@@ -90,8 +90,14 @@ const MainPage = () => (
                     <Icon name="cart-outline" size={size} color={color} />
                 ),
                 tabBarLabel: () => null, // Yazıyı kaldır
+                listeners: ({ navigation }) => ({ // listeners ekleyin
+                    tabPress: () => {
+                        navigation.navigate('Sepet', { reload: true }); // 'Sepet' ekranına yönlendirirken reload parametresini true olarak ayarla
+                    }
+                })
             }}
         />
+
         <Tab.Screen
             name="Kullanici"
             component={() => null}

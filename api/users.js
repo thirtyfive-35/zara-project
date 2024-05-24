@@ -287,6 +287,29 @@ app.get('/api/products/:gender', (req, res) => {
     });
   });
 
+  app.put('/sepet/purchase', authenticateToken, (req, res) => {
+    const userId = req.user.userId;
+
+    const query = `
+        UPDATE sepet 
+        SET miktar = 0, aktif = 0 
+        WHERE userId = ?`;
+
+    db.query(query, [userId], (err, result) => {
+        if (err) {
+            console.error('Veritabanı güncelleme hatası: ', err);
+            return res.status(500).json({ error: 'Veritabanı hatası' });
+        }
+
+        if (result.affectedRows === 0) {
+            return res.status(404).json({ message: 'Kullanıcıya ait sepet bulunamadı' });
+        }
+
+        res.status(200).json({ message: 'Sepet başarıyla güncellendi' });
+    });
+});
+
+
 
 
 const PORT = 3000;

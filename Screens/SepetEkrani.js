@@ -1,37 +1,49 @@
 import React, { useEffect, useState } from 'react';
-import { View, Text, Image, StyleSheet, FlatList, TouchableOpacity } from 'react-native';
+import { View, Text, Image, StyleSheet, FlatList, TouchableOpacity, Alert } from 'react-native';
 import axios from 'axios';
 import { useAuth } from './AuthContext';
 
-const SepetEkrani = () => {
+const SepetEkrani= ({ route }) => {
     const [sepet, setSepet] = useState([]);
     const { token } = useAuth();
+    const [purchased, setPurchased] = useState(false); // satın alma durumu
     const [reload, setReload] = useState(false); // reload state'i ekle
 
     useEffect(() => {
-        const fetchSepet = async () => {
-            try {
-                const response = await axios.get('http://192.168.1.28:3000/sepet', {
-                    headers: {
-                        Authorization: `Bearer ${token}`
-                    }
-                });
-                // Gelen veriyi doğrudan ayarla
-                const data = response.data.map(item => {
-                    console.log('Fetched item:', item); // Gelen veriyi logla
-                    return {
-                        ...item,
-                        miktar: item.miktar || 1 // Sunucudan gelen miktar değeri geçerli değilse 1 yap
-                    };
-                });
-                setSepet(data);
-            } catch (error) {
-                console.error(error);
-            }
-        };
+        if (route.params?.reload) {
+            fetchSepet();
+        }
+    }, [route.params?.reload]);
 
+    useEffect(() => {
         fetchSepet();
-    }, [token, reload]); // reload state'ini useEffect bağımlılıklarına ekle
+    }, [token, purchased, reload]); // reload state'ini useEffect bağımlılıklarına ekle
+
+    const fetchSepet = async () => {
+        try {
+            const response = await axios.get('http://192.168.1.28:3000/sepet', {
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
+            });
+            // Gelen veriyi doğrudan ayarla
+            const data = response.data.map(item => {
+                console.log('Fetched item:', item); // Gelen veriyi logla
+                return {
+                    ...item,
+                    miktar: item.miktar || 1 // Sunucudan gelen miktar değeri geçerli değilse 1 yap
+                };
+            });
+            setSepet(data);
+        } catch (error) {
+            console.error(error);
+        }
+    };
+
+    const handleRefreshSepet = () => {
+        fetchSepet(); // Butona basıldığında sepeti yenile
+        setReload(!reload); // reload state'ini tersine çevirerek yenilemeyi tetikle
+    };
 
     const handleUpdateQuantity = async (urunId, newQuantity) => {
         try {
@@ -62,7 +74,8 @@ const SepetEkrani = () => {
                 });
             });
             console.log(responseData); // Başarılı yanıtı konsola yazdır
-            setReload(!reload); // handleUpdateQuantity tamamlandığında reload state'ini değiştir
+            setReload(!reload); // reload state'ini tersine çevirerek yenilemeyi tetikle
+            setPurchased(false); // handleUpdateQuantity tamamlandığında satın alındı durumunu false yap
         } catch (error) {
             console.error('There was a problem with your fetch operation:', error);
         }
@@ -85,7 +98,31 @@ const SepetEkrani = () => {
             console.error('Invalid miktar:', miktar); // Geçersiz miktar değerini logla
         }
     };
+
+    const handlePurchase = async () => {
+        try {
+            const response = await fetch('http://192.168.1.28:3000/sepet/purchase', {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`
+                }
+            });
     
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+    
+            const responseData = await response.json();
+            console.log(responseData); // Log the successful response
+            setSepet([]); // Clear the cart
+            setPurchased(true); // Update the purchase state
+        } catch (error) {
+            console.error('There was a problem with your fetch operation:', error);
+        }
+    };
+    
+
     const renderItem = ({ item }) => (
         <View style={styles.item}>
             <Image source={{ uri: item.urunUrl }} style={styles.image} />
@@ -105,18 +142,34 @@ const SepetEkrani = () => {
         </View>
     );
 
+    const toplamFiyat = sepet.reduce((acc, item) => acc + (item.urunFiyat * item.miktar), 0);
+
     return (
-        <FlatList
-            data={sepet}
-            renderItem={renderItem}
-            keyExtractor={(item, index) => index.toString()}
-            contentContainerStyle={styles.container}
-        />
+        <View style={styles.container}>
+            <FlatList
+                data={sepet}
+                renderItem={renderItem}
+                keyExtractor={(item, index) => index.toString()}
+                contentContainerStyle={styles.listContainer}
+            />
+            <TouchableOpacity onPress={handleRefreshSepet} style={styles.refreshButton}>
+                <Text style={styles.refreshButtonText}>Sepeti Yenile</Text>
+            </TouchableOpacity>
+            <View style={styles.footer}>
+                <Text style={styles.totalPrice}>Toplam: {toplamFiyat} TL</Text>
+                <TouchableOpacity onPress={handlePurchase} style={styles.purchaseButton}>
+                    <Text style={styles.purchaseButtonText}>Satın Al</Text>
+                </TouchableOpacity>
+            </View>
+        </View>
     );
 };
 
 const styles = StyleSheet.create({
     container: {
+        flex: 1,
+    },
+    listContainer: {
         padding: 10,
     },
     item: {
@@ -168,6 +221,39 @@ const styles = StyleSheet.create({
     quantity: {
         fontSize: 16,
         marginHorizontal: 10,
+    },
+    footer: {
+        padding: 10,
+        backgroundColor: '#fff',
+        borderTopWidth: 1,
+        borderColor: '#ccc',
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+    },
+    totalPrice: {
+        fontSize: 18,
+        fontWeight: 'bold',
+    },
+    purchaseButton: {
+        backgroundColor: '#28a745',
+        paddingVertical: 10,
+        paddingHorizontal: 20,
+        borderRadius: 5,
+    },
+    purchaseButtonText: {
+        color: '#fff',
+        fontSize: 16,
+        fontWeight: 'bold',
+    },
+    purchaseMessage: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
+    purchaseMessageText: {
+        fontSize: 24,
+        fontWeight: 'bold',
     },
 });
 

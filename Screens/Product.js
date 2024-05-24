@@ -4,6 +4,8 @@ import { Ionicons } from '@expo/vector-icons'; // Çarpı simgesi için
 import { useNavigation, useRoute } from '@react-navigation/native'; // Navigasyon ve route için
 import { useAuth } from './AuthContext'; 
 import SepetEkrani from './SepetEkrani';
+import Mainpage from './Mainpage';
+
 
 const { width, height } = Dimensions.get('screen');
 
