@@ -5,6 +5,7 @@ import Icon from 'react-native-vector-icons/Ionicons';
 import Searchpage from './Searchpage';
 import Menupage from './Menupage';
 import SepetEkrani from './SepetEkrani';
+import Userpage from './Userpage';
 
 const { width, height } = Dimensions.get('screen');
 
@@ -100,7 +101,7 @@ const MainPage = () => (
 
         <Tab.Screen
             name="Kullanici"
-            component={() => null}
+            component={Userpage}
             options={{
                 headerShown:false,
                 tabBarIcon: ({ color, size }) => (

@@ -168,9 +168,12 @@ const SepetEkrani= ({ route }) => {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
+        backgroundColor:'#fff',
+        position:'relative',
     },
     listContainer: {
         padding: 10,
+        flexGrow:1,
     },
     item: {
         flexDirection: 'row',
@@ -183,6 +186,8 @@ const styles = StyleSheet.create({
         shadowOffset: { width: 0, height: 1 },
         shadowRadius: 5,
         elevation: 2,
+        borderWidth:1,
+        borderColor:'#000',
     },
     image: {
         width: 80,
@@ -209,10 +214,10 @@ const styles = StyleSheet.create({
     button: {
         width: 30,
         height: 30,
-        borderRadius: 15,
+        borderRadius: 5,
         justifyContent: 'center',
         alignItems: 'center',
-        backgroundColor: '#ccc',
+        backgroundColor: '#000',
     },
     buttonText: {
         fontSize: 20,
@@ -223,6 +228,7 @@ const styles = StyleSheet.create({
         marginHorizontal: 10,
     },
     footer: {
+        position:'absolute',
         padding: 10,
         backgroundColor: '#fff',
         borderTopWidth: 1,
@@ -230,16 +236,19 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'space-between',
         alignItems: 'center',
+        marginTop:750,
     },
     totalPrice: {
         fontSize: 18,
         fontWeight: 'bold',
     },
     purchaseButton: {
-        backgroundColor: '#28a745',
+        backgroundColor: '#000',
         paddingVertical: 10,
-        paddingHorizontal: 20,
-        borderRadius: 5,
+        paddingHorizontal: 30,
+        borderRadius: 6,
+        marginLeft:150,
+
     },
     purchaseButtonText: {
         color: '#fff',

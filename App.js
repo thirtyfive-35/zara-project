@@ -11,6 +11,7 @@ import Product from './Screens/Product'; // Product dosyasının doğru yolu
 import Menupage from './Screens/Menupage';
 import Menuback from './Screens/Menuback';
 import SepetEkrani from './Screens/SepetEkrani';
+import Userpage from './Screens/Userpage';
 
 const Stack = createStackNavigator();
 
@@ -27,6 +28,7 @@ const App = () => {
         <Stack.Screen name="Menupage" component={Menupage} options={{ headerShown: false }} />
         <Stack.Screen name="Menuback" component={Menuback} options={{ headerShown: false }} />
         <Stack.Screen name="SepetEkrani" component={SepetEkrani} options={{ headerShown: false }} />
+        <Stack.Screen name="Userpage" component={Userpage} options={{ headerShown: false }} />
       </Stack.Navigator>
     </NavigationContainer>
     </AuthProvider>

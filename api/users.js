@@ -309,6 +309,26 @@ app.get('/api/products/:gender', (req, res) => {
     });
 });
 
+// Kullanıcı verilerini çeken API
+app.get('/api/users',authenticateToken, (req, res) => {
+    const userId = req.user.userId;
+    const query = 'SELECT fullname, email, mobile,password FROM users WHERE id = ?';
+
+    db.query(query, [userId], (err, results) => {
+        if (err) {
+          console.error('Veri çekerken hata oluştu:', err);
+          res.status(500).send('Veri çekerken hata oluştu');
+          return;
+        }
+
+        if (results.length === 0) {
+          return res.status(404).send('Kullanıcı bulunamadı');
+        }
+
+        res.json(results);
+      });
+    });
+
 
 
 
