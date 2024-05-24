@@ -86,6 +86,50 @@ app.post('/add-to-cart', authenticateToken, (req, res) => {
     });
 });
 
+// Protected endpoint to get sepet data
+app.get('/sepet', authenticateToken, (req, res) => {
+    const userId = req.user.userId; // User ID from token
+    const query = `
+        SELECT
+            sepet.urunId, 
+            urun.urunAd, 
+            urun.urunFiyat, 
+            urundetay.urunUrl,
+            sepet.miktar
+        FROM sepet 
+        INNER JOIN urun ON sepet.urunId = urun.id 
+        INNER JOIN urundetay ON urun.id = urundetay.urunId 
+        WHERE sepet.userId = ? AND sepet.miktar != 0 GROUP BY sepet.urunId
+        `;
+
+    db.query(query, [userId], (err, results) => {
+        if (err) {
+            res.status(500).json({ error: err.message });
+            return;
+        }
+        res.json(results);
+    });
+});
+
+// API endpoint to update quantity of a product in the sepet table
+app.put('/sepet/updateQuantity',authenticateToken, (req, res) => {
+    const userId = req.user.userId;
+    const { urunId, miktar } = req.body;
+
+    // Update the quantity of the product in the database
+    db.query(
+        'UPDATE sepet SET miktar = ?, aktif = CASE WHEN ? > 0 THEN 1 ELSE 0 END WHERE userId = ? AND urunId = ?',
+        [miktar, miktar, userId, urunId],
+        (error, results) => {
+            if (error) {
+                console.error(error);
+                return res.status(500).json({ message: 'Internal Server Error' });
+            }
+            return res.status(200).json({ message: 'Quantity updated successfully' });
+        }
+    );
+});
+
 
 
 app.post('/register', async (req, res) => {

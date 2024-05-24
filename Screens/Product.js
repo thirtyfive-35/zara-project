@@ -3,7 +3,7 @@ import { Image, View, Text, TouchableOpacity, StatusBar, Dimensions, StyleSheet,
 import { Ionicons } from '@expo/vector-icons'; // Çarpı simgesi için
 import { useNavigation, useRoute } from '@react-navigation/native'; // Navigasyon ve route için
 import { useAuth } from './AuthContext'; 
-
+import SepetEkrani from './SepetEkrani';
 
 const { width, height } = Dimensions.get('screen');
 
@@ -39,6 +39,8 @@ const Product = () => {
             console.log(data); // API'den dönen yanıtı konsola yazdır
             console.log(urunId)
             alert('Ürün sepete eklendi');
+            goMenu();
+
             // Burada isteğin başarılı olduğuna dair bir işlem yapabilirsiniz
         } catch (error) {
             console.error('Error:', error);
@@ -46,6 +48,11 @@ const Product = () => {
             alert('Bir hata oluştu. Lütfen daha sonra tekrar deneyin.');
         }
     };
+
+    const goMenu = () => {
+        navigation.navigate('SepetEkrani');
+    };
+
     
 
     useEffect(() => {

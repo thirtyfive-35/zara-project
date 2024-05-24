@@ -4,6 +4,7 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Icon from 'react-native-vector-icons/Ionicons';
 import Searchpage from './Searchpage';
 import Menupage from './Menupage';
+import SepetEkrani from './SepetEkrani';
 
 const { width, height } = Dimensions.get('screen');
 
@@ -82,7 +83,7 @@ const MainPage = () => (
         />
         <Tab.Screen
             name="Sepet"
-            component={() => null}
+            component={SepetEkrani}
             options={{
                 headerShown:false,
                 tabBarIcon: ({ color, size }) => (
