@@ -7,6 +7,8 @@
 
 Bringing a new breath to the mobile shopping world, this app offers users a chic and modern shopping experience. With an interface and user-friendly design that closely resembles the Zara shopping app, this application aims to become an indispensable platform for fashion enthusiasts. This full-stack project includes both frontend and backend components.
 
+thanks for my teammate @sezenMelis
+
 # Screenshots
 
 ![gif](https://github.com/thirtyfive-35/zara-project/blob/main/gif/tovideo.gif)
