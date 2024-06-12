@@ -8,7 +8,7 @@
 Expertease is your go-to platform for freelance expertise. Whether you're a freelancer offering your skills or a client in search of top talent, Expertease connects you effortlessly. Find experts in a variety of fields, from web development and graphic design to content writing and more. Join our community and tap into a world of freelance excellence. Welcome to Expertease, where skills meet opportunity.
 
 
-## Run Locally
+## Installation
 
 Clone the project
 
@@ -28,7 +28,7 @@ Install dependencies
   npm install
 ```
 
-## import database
+### import database
 
 go to database folder and import olwe-database.sql file
 
