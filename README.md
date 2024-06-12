@@ -1,5 +1,5 @@
 
-![Logo](https://i.ibb.co/TRsfBYj/expertease-ijo-p02.png)
+![Logo](https://github.com/thirtyfive-35/zara-project/blob/main/assets/images/logo/logo.png)
 
 
 # ExpertEase
@@ -12,13 +12,13 @@ Expertease is your go-to platform for freelance expertise. Whether you're a free
 Clone the project
 
 ```bash
-  git clone https://github.com/thirtyfive-35/freelancer-website-yazilim-sinama.git
+  git clone https://github.com/thirtyfive-35/zara-project
 ```
 
 Go to the project directory
 
 ```bash
-  cd freelancer-website-yazilim-sinama-main
+  cd zara-project
 ```
 
 Install dependencies
@@ -51,7 +51,5 @@ npm --version
 
 
 
-
-## thanks you @Oecophyllaa for the template 
 
 
