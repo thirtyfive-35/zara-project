@@ -12,9 +12,9 @@ Bringing a new breath to the mobile shopping world, this app offers users a chic
 ![gif](https://github.com/thirtyfive-35/zara-project/blob/main/gif/tovideo.gif)
 
 
-## Ekran Görüntüleri
+## all pages
 
-<blockquote class="imgur-embed-pub" lang="en" data-id="a/k6uVPQv"><a href="//imgur.com/a/k6uVPQv">View post on imgur.com</a></blockquote><script async src="//s.imgur.com/min/embed.js" charset="utf-8"></script>
+<blockquote class="imgur-embed-pub" lang="en" data-id="a/k6uVPQv"><a href="//imgur.com/a/k6uVPQv">View post on imgur.com</a></blockquote>
 
 
 
