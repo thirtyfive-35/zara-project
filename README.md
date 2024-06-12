@@ -27,7 +27,7 @@ Install dependencies
   npm install
 ```
 
-import database
+## import database
 
 go to database folder and import olwe-database.sql file
 
