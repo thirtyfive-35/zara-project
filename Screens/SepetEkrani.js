@@ -21,7 +21,7 @@ const SepetEkrani= ({ route }) => {
 
     const fetchSepet = async () => {
         try {
-            const response = await axios.get('http://192.168.1.28:3000/sepet', {
+            const response = await axios.get('http://192.168.1.16:3000/sepet', {
                 headers: {
                     Authorization: `Bearer ${token}`
                 }
@@ -48,7 +48,7 @@ const SepetEkrani= ({ route }) => {
     const handleUpdateQuantity = async (urunId, newQuantity) => {
         try {
             console.log(`Updating urunId: ${urunId}, newQuantity: ${newQuantity}`); // Güncellenen miktarı logla
-            const response = await fetch('http://192.168.1.28:3000/sepet/updateQuantity', {
+            const response = await fetch('http://192.168.1.16:3000/sepet/updateQuantity', {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',
@@ -101,7 +101,7 @@ const SepetEkrani= ({ route }) => {
 
     const handlePurchase = async () => {
         try {
-            const response = await fetch('http://192.168.1.28:3000/sepet/purchase', {
+            const response = await fetch('http://192.168.1.16:3000/sepet/purchase', {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',

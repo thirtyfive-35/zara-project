@@ -29,7 +29,7 @@ const Product = () => {
     const addToCart = async () => {
         console.log(token);
         try {
-            const response = await fetch('http://192.168.1.28:3000/add-to-cart', {
+            const response = await fetch('http://192.168.1.16:3000/add-to-cart', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -61,7 +61,7 @@ const Product = () => {
         
         // API isteği yaparak ürün detaylarını al
         if (urunId) {
-            fetch(`http://192.168.1.28:3000/menu/urun/detay?urunId=${urunId}`)
+            fetch(`http://192.168.1.16:3000/menu/urun/detay?urunId=${urunId}`)
                 .then(response => response.json())
                 .then(data => {
                     if (data && data.length > 0) {

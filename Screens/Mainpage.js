@@ -10,11 +10,11 @@ import Userpage from './Userpage';
 const { width, height } = Dimensions.get('screen');
 
 const images = [
-    'https://static.zara.net/assets/public/dd96/6158/760141f793cc/d529bc5e9e64/01063406832-p/01063406832-p.jpg?ts=1708510193846&amp;w=503',
-    'https://static.zara.net/assets/public/dd96/6158/760141f793cc/d529bc5e9e64/01063406832-p/01063406832-p.jpg?ts=1708510193846&amp;w=503',
-    'https://static.zara.net/assets/public/dd96/6158/760141f793cc/d529bc5e9e64/01063406832-p/01063406832-p.jpg?ts=1708510193846&amp;w=503',
-    'https://static.zara.net/assets/public/dd96/6158/760141f793cc/d529bc5e9e64/01063406832-p/01063406832-p.jpg?ts=1708510193846&amp;w=503',
-    'https://static.zara.net/assets/public/dd96/6158/760141f793cc/d529bc5e9e64/01063406832-p/01063406832-p.jpg?ts=1708510193846&amp;w=503',
+    'https://static.zara.net/assets/public/afdc/8fc0/2937473db306/6f90a318577f/image-portrait-ipad-fill-41c9c880-d07c-433d-8aeb-f56a6e0cef1f-default_0.jpg?ts=1716395238417&w=948',
+    'https://static.zara.net/assets/public/886e/6345/870544a1b85f/2b94c3e64bc2/image-portrait-ipad-fill-51c23de4-c2ac-456e-a032-5daccba363cc-default_0.jpg?ts=1716394068256&w=948',
+    'https://static.zara.net/assets/public/afdc/8fc0/2937473db306/6f90a318577f/image-portrait-ipad-fill-41c9c880-d07c-433d-8aeb-f56a6e0cef1f-default_0.jpg?ts=1716395238417&w=948',
+    'https://static.zara.net/assets/public/886e/6345/870544a1b85f/2b94c3e64bc2/image-portrait-ipad-fill-51c23de4-c2ac-456e-a032-5daccba363cc-default_0.jpg?ts=1716394068256&w=948',
+    'https://static.zara.net/assets/public/afdc/8fc0/2937473db306/6f90a318577f/image-portrait-ipad-fill-41c9c880-d07c-433d-8aeb-f56a6e0cef1f-default_0.jpg?ts=1716395238417&w=948',
 ];
 
 const ITEM_WIDTH = width;

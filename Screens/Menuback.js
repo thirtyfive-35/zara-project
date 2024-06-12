@@ -13,7 +13,7 @@ const Menuback = ({ route }) => {
         // category ve content değerlerinin tanımlı olduğunu kontrol et
         if (category && content) {
             // API isteği göndermek için fetch kullanımı
-            fetch(`http://192.168.1.28:3000/menu/urunler?cinsiyet=${category.toLowerCase()}&kategori=${content.toUpperCase()}`)
+            fetch(`http://192.168.1.16:3000/menu/urunler?cinsiyet=${category.toLowerCase()}&kategori=${content.toUpperCase()}`)
                 .then(response => response.json())
                 .then(data => {
                     setProducts(data); // API'den gelen verileri state'e kaydet

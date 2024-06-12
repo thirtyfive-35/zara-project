@@ -11,7 +11,7 @@ const SingIn = ({ navigation }) => {
   // Kullanıcı girişi fonksiyonu
   const handleSignIn = () => {
     // API'ye post isteği gönder
-    fetch('http://192.168.1.28:3000/login', {
+    fetch('http://192.168.1.16:3000/login', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'

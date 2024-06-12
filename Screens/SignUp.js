@@ -25,7 +25,7 @@ const SignUp = () => {
     };
 
     // API'ye POST isteği gönder
-    fetch('http://192.168.1.28:3000/register', {
+    fetch('http://192.168.1.16:3000/register', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'

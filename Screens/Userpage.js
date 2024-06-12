@@ -3,7 +3,7 @@ import { View, Text, StyleSheet, ActivityIndicator } from 'react-native';
 import axios from 'axios';
 import { useAuth } from './AuthContext';
 
-const API_URL = 'http://192.168.1.28:3000/api/users'; // API URL'si
+const API_URL = 'http://192.168.1.16:3000/api/users'; // API URL'si
 
 const Userpage = () => {
     const [userData, setUserData] = useState(null);

@@ -17,7 +17,7 @@ const Searchpage = () => {
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const response = await fetch(`http://192.168.1.28:3000/api/products/${selectedCinsiyet}`);
+        const response = await fetch(`http://192.168.1.16:3000/api/products/${selectedCinsiyet}`);
         const data = await response.json();
         setProducts(data);
       } catch (error) {
