@@ -14,7 +14,8 @@ Bringing a new breath to the mobile shopping world, this app offers users a chic
 
 ## Ekran Görüntüleri
 
-![Ekran görüntüsü 2024-06-12 025152.png](https://imgur.com/a/mo6qUVe)
+<blockquote class="imgur-embed-pub" lang="en" data-id="a/k6uVPQv"><a href="//imgur.com/a/k6uVPQv">View post on imgur.com</a></blockquote><script async src="//s.imgur.com/min/embed.js" charset="utf-8"></script>
+
 
 
 # Installation
