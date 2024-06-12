@@ -14,15 +14,18 @@ Bringing a new breath to the mobile shopping world, this app offers users a chic
 
 ## Ekran Görüntüleri
 
-1. ![Ekran görüntüsü 2024-06-12 025152.png](https://github.com/thirtyfive-35/zara-project/blob/main/gif/pagePhoto/Ekran%20g%C3%B6r%C3%BCnt%C3%BCs%C3%BC%202024-06-12%20025152.png)
-2. ![Ekran görüntüsü 2024-06-12 025222.png](https://github.com/thirtyfive-35/zara-project/blob/main/gif/pagePhoto/Ekran%20g%C3%B6r%C3%BCnt%C3%BCs%C3%BC%202024-06-12%20025222.png)
-3. ![Ekran görüntüsü 2024-06-12 025240.png](https://github.com/thirtyfive-35/zara-project/blob/main/gif/pagePhoto/Ekran%20g%C3%B6r%C3%BCnt%C3%BCs%C3%BC%202024-06-12%20025240.png)
-4. ![Ekran görüntüsü 2024-06-12 025253.png](https://github.com/thirtyfive-35/zara-project/blob/main/gif/pagePhoto/Ekran%20g%C3%B6r%C3%BCnt%C3%BCs%C3%BC%202024-06-12%20025253.png)
-5. ![Ekran görüntüsü 2024-06-12 025309.png](https://github.com/thirtyfive-35/zara-project/blob/main/gif/pagePhoto/Ekran%20g%C3%B6r%C3%BCnt%C3%BCs%C3%BC%202024-06-12%20025309.png)
-6. ![Ekran görüntüsü 2024-06-12 025322.png](https://github.com/thirtyfive-35/zara-project/blob/main/gif/pagePhoto/Ekran%20g%C3%B6r%C3%BCnt%C3%BCs%C3%BC%202024-06-12%20025322.png)
-7. ![Ekran görüntüsü 2024-06-12 025345.png](https://github.com/thirtyfive-35/zara-project/blob/main/gif/pagePhoto/Ekran%20g%C3%B6r%C3%BCnt%C3%BCs%C3%BC%202024-06-12%20025345.png)
-8. ![Ekran görüntüsü 2024-06-12 025401.png](https://github.com/thirtyfive-35/zara-project/blob/main/gif/pagePhoto/Ekran%20g%C3%B6r%C3%BCnt%C3%BCs%C3%BC%202024-06-12%20025401.png)
-9. ![Ekran görüntüsü 2024-06-12 025444.png](https://github.com/thirtyfive-35/zara-project/blob/main/gif/pagePhoto/Ekran%20g%C3%B6r%C3%BCnt%C3%BCs%C3%BC%202024-06-12%20025444.png)
+![Ekran görüntüsü 2024-06-12 025152.png](https://github.com/thirtyfive-35/zara-project/blob/main/gif/pagePhoto/Ekran%20g%C3%B6r%C3%BCnt%C3%BCs%C3%BC%202024-06-12%20025152.png)
+![Ekran görüntüsü 2024-06-12 025222.png](https://github.com/thirtyfive-35/zara-project/blob/main/gif/pagePhoto/Ekran%20g%C3%B6r%C3%BCnt%C3%BCs%C3%BC%202024-06-12%20025222.png)
+![Ekran görüntüsü 2024-06-12 025240.png](https://github.com/thirtyfive-35/zara-project/blob/main/gif/pagePhoto/Ekran%20g%C3%B6r%C3%BCnt%C3%BCs%C3%BC%202024-06-12%20025240.png)
+
+![Ekran görüntüsü 2024-06-12 025253.png](https://github.com/thirtyfive-35/zara-project/blob/main/gif/pagePhoto/Ekran%20g%C3%B6r%C3%BCnt%C3%BCs%C3%BC%202024-06-12%20025253.png)
+![Ekran görüntüsü 2024-06-12 025309.png](https://github.com/thirtyfive-35/zara-project/blob/main/gif/pagePhoto/Ekran%20g%C3%B6r%C3%BCnt%C3%BCs%C3%BC%202024-06-12%20025309.png)
+![Ekran görüntüsü 2024-06-12 025322.png](https://github.com/thirtyfive-35/zara-project/blob/main/gif/pagePhoto/Ekran%20g%C3%B6r%C3%BCnt%C3%BCs%C3%BC%202024-06-12%20025322.png)
+
+![Ekran görüntüsü 2024-06-12 025345.png](https://github.com/thirtyfive-35/zara-project/blob/main/gif/pagePhoto/Ekran%20g%C3%B6r%C3%BCnt%C3%BCs%C3%BC%202024-06-12%20025345.png)
+![Ekran görüntüsü 2024-06-12 025401.png](https://github.com/thirtyfive-35/zara-project/blob/main/gif/pagePhoto/Ekran%20g%C3%B6r%C3%BCnt%C3%BCs%C3%BC%202024-06-12%20025401.png)
+![Ekran görüntüsü 2024-06-12 025444.png](https://github.com/thirtyfive-35/zara-project/blob/main/gif/pagePhoto/Ekran%20g%C3%B6r%C3%BCnt%C3%BCs%C3%BC%202024-06-12%20025444.png)
+
 
 
 # Installation
