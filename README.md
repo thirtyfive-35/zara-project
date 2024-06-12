@@ -5,11 +5,24 @@
 
 # olwe shopping app
 
-Expertease is your go-to platform for freelance expertise. Whether you're a freelancer offering your skills or a client in search of top talent, Expertease connects you effortlessly. Find experts in a variety of fields, from web development and graphic design to content writing and more. Join our community and tap into a world of freelance excellence. Welcome to Expertease, where skills meet opportunity.
+Bringing a new breath to the mobile shopping world, this app offers users a chic and modern shopping experience. With an interface and user-friendly design that closely resembles the Zara shopping app, this application aims to become an indispensable platform for fashion enthusiasts. This full-stack project includes both frontend and backend components.
 
 # Screenshots
 
 ![gif](https://github.com/thirtyfive-35/zara-project/blob/main/gif/tovideo.gif)
+
+
+## Ekran Görüntüleri
+
+1. ![Ekran görüntüsü 2024-06-12 025152.png](https://github.com/thirtyfive-35/zara-project/raw/main/gif/pagePhoto/2024-06-12%20025152.png)
+2. ![Ekran görüntüsü 2024-06-12 025222.png](https://github.com/thirtyfive-35/zara-project/raw/main/gif/pagePhoto/2024-06-12%20025222.png)
+3. ![Ekran görüntüsü 2024-06-12 025240.png](https://github.com/thirtyfive-35/zara-project/raw/main/gif/pagePhoto/2024-06-12%20025240.png)
+4. ![Ekran görüntüsü 2024-06-12 025253.png](https://github.com/thirtyfive-35/zara-project/raw/main/gif/pagePhoto/2024-06-12%20025253.png)
+5. ![Ekran görüntüsü 2024-06-12 025309.png](https://github.com/thirtyfive-35/zara-project/raw/main/gif/pagePhoto/2024-06-12%20025309.png)
+6. ![Ekran görüntüsü 2024-06-12 025322.png](https://github.com/thirtyfive-35/zara-project/raw/main/gif/pagePhoto/2024-06-12%20025322.png)
+7. ![Ekran görüntüsü 2024-06-12 025345.png](https://github.com/thirtyfive-35/zara-project/raw/main/gif/pagePhoto/2024-06-12%20025345.png)
+8. ![Ekran görüntüsü 2024-06-12 025401.png](https://github.com/thirtyfive-35/zara-project/raw/main/gif/pagePhoto/2024-06-12%20025401.png)
+9. ![Ekran görüntüsü 2024-06-12 025444.png](https://github.com/thirtyfive-35/zara-project/raw/main/gif/pagePhoto/2024-06-12%20025444.png)
 
 
 # Installation
