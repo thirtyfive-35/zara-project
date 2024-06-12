@@ -14,7 +14,7 @@ Bringing a new breath to the mobile shopping world, this app offers users a chic
 
 ## Ekran Görüntüleri
 
-1. ![Ekran görüntüsü 2024-06-12 025152.png](https://github.com/thirtyfive-35/zara-project/raw/main/gif/pagePhoto/2024-06-12%20025152.png)
+1. ![Ekran görüntüsü 2024-06-12 025152.png](https://github.com/thirtyfive-35/zara-project/raw/main/gif/pagePhoto/2024-06-12 25152.png)
 2. ![Ekran görüntüsü 2024-06-12 025222.png](https://github.com/thirtyfive-35/zara-project/raw/main/gif/pagePhoto/2024-06-12%20025222.png)
 3. ![Ekran görüntüsü 2024-06-12 025240.png](https://github.com/thirtyfive-35/zara-project/raw/main/gif/pagePhoto/2024-06-12%20025240.png)
 4. ![Ekran görüntüsü 2024-06-12 025253.png](https://github.com/thirtyfive-35/zara-project/raw/main/gif/pagePhoto/2024-06-12%20025253.png)
