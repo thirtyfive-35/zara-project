@@ -14,7 +14,7 @@ Bringing a new breath to the mobile shopping world, this app offers users a chic
 
 ## all pages
 
-<blockquote class="imgur-embed-pub" lang="en" data-id="a/k6uVPQv"><a href="//imgur.com/a/k6uVPQv">View post on imgur.com</a></blockquote>
+<blockquote class="imgur-embed-pub" lang="en" data-id="a/k6uVPQv"><a href="//imgur.com/a/k6uVPQv">Click to see all pages</a></blockquote>
 
 
 
