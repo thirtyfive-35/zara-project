@@ -1,5 +1,5 @@
 
-![Logo](https://github.com/thirtyfive-35/zara-project/blob/main/assets/images/logo/logos.png)
+![Logo](https://github.com/thirtyfive-35/zara-project/blob/main/assets/images/logo/README-logo)
 
 
 # olwe shopping app
